@@ -73,7 +73,7 @@ class graph{
       var edge ={};
       edge.group="edges";
       var data={};
-      data.id="e"+i;
+      data.id="e"+""+this.edges[i].from+""+this.edges[i].to;
       data.source=this.edges[i].from;
       data.target=this.edges[i].to;
       edge.data=data;
