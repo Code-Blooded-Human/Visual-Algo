@@ -46,11 +46,11 @@ class graph{
     this.vertices.push(new vertex(this.vertices.length,name,x,y));
   }
 
-  addEdge(to,from,weight=1){
-    this.edges.push(new edge(to,from,weight));
+  addEdge(from,to,weight=1){
+    this.edges.push(new edge(from,to,weight));
     this.vertices[from].addChildren(to);
     if(this.type=="u" || this.type=="uw"){
-      this.edges.push(new edge(from,to,weight));
+      this.edges.push(new edge(to,from,weight));
       this.vertices[to].addChildren(from);
     }
   }
