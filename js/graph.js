@@ -4,11 +4,15 @@ class vertex{
   children;
   x;
   y;
+  color;
+  visited;
   constructor(id,name,x,y){
     this.id=id;
     this.name=name;
     this.x=x;
     this.y=y;
+    this.visited=false;
+    this.color="blue";
     this.children= new Array();
   }
   addChildren(id){
@@ -19,10 +23,12 @@ class vertex{
 class edge{
   from;
   to;
+  color;
   weight;
   constructor(from,to,weight){
     this.from=from;
     this.to=to;
+    this.color="grey";
     this.weight=weight;
   }
 }
@@ -76,10 +82,3 @@ class graph{
     return graphData;
   }
 }
-g= new graph("ud");
-g.addVertex("A",100,100);
-g.addVertex("B",200,100);
-g.addVertex("C",100,200);
-g.addVertex("D",200,200);
-g.addEdge(1,0,1);
-g.addEdge(3,1,1);
