@@ -50,7 +50,7 @@ class graph{
     this.edges.push(new edge(from,to,weight));
     this.vertices[from].addChildren(to);
     if(this.type=="u" || this.type=="uw"){
-      this.edges.push(new edge(to,from,weight));
+      //this.edges.push(new edge(to,from,weight));
       this.vertices[to].addChildren(from);
     }
   }
