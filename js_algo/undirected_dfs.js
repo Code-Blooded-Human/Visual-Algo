@@ -1,11 +1,8 @@
 g= new graph("u");
-g.addVertex("A",100,100);
-g.addVertex("B",200,100);
-g.addVertex("C",100,200);
-g.addVertex("D",200,200);
-g.addEdge(0,1,1); //from,to
-g.addEdge(0,3,1);
-g.addEdge(1,2,1);
+graphData=localStorage.getItem("graphData");
+graphData=JSON.parse(graphData);
+g.vertices=graphData.vertices;
+g.edges=graphData.edges;
 //g.addEdge(2,1,1);
 
 console.log(g.getGraph());
