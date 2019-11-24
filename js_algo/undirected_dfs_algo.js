@@ -38,6 +38,7 @@ function dfs(node){
           g.vertices[g.vertices[n].children[i]].visited=true;
           cy.getElementById(g.vertices[n].children[i]).addClass('visited');
           cy.getElementById("e"+""+n+""+g.vertices[n].children[i]).addClass("edgeVisited");
+            cy.getElementById("e"+""+g.vertices[n].children[i]+""+n).addClass("edgeVisited");
           break;
         }
     }
