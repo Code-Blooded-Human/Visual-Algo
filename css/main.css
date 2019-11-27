@@ -1,0 +1,27 @@
+.left-bar{
+
+  background-color: #14A76C;
+  height: 100vh;
+}
+.center-bar{
+
+
+  height: 100%;
+}
+.right-bar{
+
+  background-color: #14A76C;
+  height: 100vh;
+}
+.main-screen{
+  position: absolute;
+  height: 100vh;
+}
+.sidebar-btn{
+  margin: 10px;
+  background-color: #17152A;
+  color: white;
+  /* padding-left: 30px;
+  padding-right: 30px; */
+  width: 80%;
+}
