@@ -1,4 +1,5 @@
 g=null;
+gbackup=null;
 cy=null;
 state=null;
 child=null;
@@ -81,6 +82,13 @@ function clear(){
     cy.destroy();
   }
 }
+function reset(){
+  g=new graph(gbackup.type);
+  g.vertices=gbackup.vertices;
+  g.edges=gbackup.edges;
+  clear();
+
+} //TODO: Make a reset function
 //Drawing handler functions
 function addVertex(x,y){
  var node={};
@@ -273,10 +281,6 @@ function draw_undirected_graph(){
     }
   }
   });
-
-
-
-
 }
 
 $("#cy").dblclick(function(e){
@@ -290,3 +294,287 @@ $("#cy").dblclick(function(e){
       addVertex(x,y);
     }
 });
+function runDFS(){
+
+  if(g==null){
+    console.log("No graph");
+    return 0;
+  }
+  if(g.vertices.length==0){
+    console.log("Empty Graph");
+    return 0;
+  }
+  if(g.type=="u" || g.type=="uw"){
+    clear();
+    cy = cytoscape({
+
+      container: document.getElementById('cy'), // container to render in
+
+      elements: [],
+
+      style: [ // the stylesheet for the graph
+        {
+          selector: 'node',
+          style: {
+            // 'background-color': 'red',
+            'label': 'data(id)'
+          }
+        },
+
+        {
+          selector: 'edge',
+          style: {
+            'width': 3,
+           'line-color': '#757575',
+            'curve-style': 'bezier',
+
+          }
+        },
+        {
+          selector: '.visited',
+          style: {
+            'background-color': 'blue',
+            'label': 'data(id)'
+          }
+        },
+        {
+          selector: '.done',
+          style: {
+            'background-color': 'yellow',
+            'label': 'data(id)'
+          }
+        },
+        {
+          selector: '.edgeVisited',
+          style: {
+            'width': 3,
+           'line-color': 'green',
+            'curve-style': 'bezier'
+
+          }
+        }
+
+      ],
+
+      layout: {
+        name: 'grid',
+        rows: 1
+      }
+
+    });
+
+    cy.add(g.getGraph());
+    cy.getElementById(0).addClass('visited');
+
+  }else if(g.type=="d" || g.type=="dw"){
+    clear();
+    cy = cytoscape({
+
+      container: document.getElementById('cy'), // container to render in
+
+      elements: [],
+
+      style: [ // the stylesheet for the graph
+        {
+          selector: 'node',
+          style: {
+            // 'background-color': 'red',
+            'label': 'data(id)'
+          }
+        },
+
+        {
+          selector: 'edge',
+          style: {
+            'width': 1,
+           'line-color': 'red',
+            'curve-style': 'bezier',
+            'target-arrow-color': 'blue',
+            'target-arrow-shape': 'triangle'
+          }
+        },
+        {
+          selector: '.visited',
+          style: {
+            'background-color': 'blue',
+            'label': 'data(id)'
+          }
+        },
+        {
+          selector: '.done',
+          style: {
+            'background-color': 'yellow',
+            'label': 'data(id)'
+          }
+        },
+        {
+          selector: '.edgeVisited',
+          style: {
+            'width': 1,
+           'line-color': 'blue',
+            'curve-style': 'bezier',
+            'target-arrow-color': 'blue',
+            'target-arrow-shape': 'triangle'
+          }
+        }
+
+      ],
+
+      layout: {
+        name: 'grid',
+        rows: 1
+      }
+
+    });
+
+     cy.add(g.getGraph());
+
+    cy.getElementById(0).addClass('visited');
+  }
+  dfsStack= new stack();
+  dfs(0);
+  start();
+
+}
+function runBFS(){
+  if(g==null){
+    console.log("No graph");
+    return 0;
+  }
+  if(g.vertices.length==0){
+    console.log("Empty Graph");
+    return 0;
+  }
+  if(g.type=="u" || g.type=="uw"){
+    clear();
+    cy = cytoscape({
+
+      container: document.getElementById('cy'), // container to render in
+
+      elements: [],
+
+      style: [ // the stylesheet for the graph
+        {
+          selector: 'node',
+          style: {
+            // 'background-color': 'red',
+            'label': 'data(id)'
+          }
+        },
+
+        {
+          selector: 'edge',
+          style: {
+            'width': 3,
+           'line-color': '#757575',
+            'curve-style': 'bezier',
+
+          }
+        },
+        {
+          selector: '.visited',
+          style: {
+            'background-color': 'blue',
+            'label': 'data(id)'
+          }
+        },
+        {
+          selector: '.done',
+          style: {
+            'background-color': 'yellow',
+            'label': 'data(id)'
+          }
+        },
+        {
+          selector: '.edgeVisited',
+          style: {
+            'width': 3,
+           'line-color': 'green',
+            'curve-style': 'bezier'
+
+          }
+        }
+
+      ],
+
+      layout: {
+        name: 'grid',
+        rows: 1
+      }
+
+    });
+
+    cy.add(g.getGraph());
+    cy.getElementById(0).addClass('visited');
+
+  }else if(g.type=="d" || g.type=="dw"){
+    clear();
+    cy = cytoscape({
+
+      container: document.getElementById('cy'), // container to render in
+
+      elements: [],
+
+      style: [ // the stylesheet for the graph
+        {
+          selector: 'node',
+          style: {
+            // 'background-color': 'red',
+            'label': 'data(id)'
+          }
+        },
+
+        {
+          selector: 'edge',
+          style: {
+            'width': 1,
+           'line-color': 'red',
+            'curve-style': 'bezier',
+            'target-arrow-color': 'blue',
+            'target-arrow-shape': 'triangle'
+          }
+        },
+        {
+          selector: '.visited',
+          style: {
+            'background-color': 'blue',
+            'label': 'data(id)'
+          }
+        },
+        {
+          selector: '.done',
+          style: {
+            'background-color': 'yellow',
+            'label': 'data(id)'
+          }
+        },
+        {
+          selector: '.edgeVisited',
+          style: {
+            'width': 1,
+           'line-color': 'blue',
+            'curve-style': 'bezier',
+            'target-arrow-color': 'blue',
+            'target-arrow-shape': 'triangle'
+          }
+        }
+
+      ],
+
+      layout: {
+        name: 'grid',
+        rows: 1
+      }
+
+    });
+
+     cy.add(g.getGraph());
+
+    cy.getElementById(0).addClass('visited');
+  }
+  start_bfs(0);
+  step();
+}
+function select_start_vertex(){
+
+}

@@ -44,10 +44,10 @@
         <button type="button" class="btn btn-elegant sidebar-btn" onclick="draw_undirected_graph()" >Draw undirected graph</button>
       </div>
       <div class="d-flex justify-content-center animated slideInLeft" style="margin-top:50px;">
-        <button type="button" class="btn btn-elegant sidebar-btn">Run Depth First Search</button>
+        <button type="button" class="btn btn-elegant sidebar-btn" onclick="runDFS()">Run Depth First Search</button>
       </div>
       <div class="d-flex justify-content-center animated slideInLeft">
-        <button type="button" class="btn btn-elegant sidebar-btn">Run Breadth First Search</button>
+        <button type="button" class="btn btn-elegant sidebar-btn" onclick="runBFS()">Run Breadth First Search</button>
       </div>
       <div class="d-flex justify-content-center animated slideInLeft">
         <button type="button" class="btn btn-elegant sidebar-btn">Kruskal's Algorithm</button>
@@ -111,16 +111,18 @@
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('.mdb-select').materialSelect();
-    });
-  </script>
 
 
 
+<script type="text/javascript" src="js_algo/stack.js"></script>
+<script type="text/javascript" src="js_algo/queue.js"></script>
 <script type="text/javascript" src="js_algo/graph.js"></script>
+
+<script type="text/javascript" src="js_algo/dfs_algo.js"></script>
+<script type="text/javascript" src="js_algo/bfs_algo.js"></script>
 <script type="text/javascript" src="js_index/main.js"></script>
+
+
 
 </body>
 
