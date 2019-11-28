@@ -5,15 +5,12 @@ state=null;
 child=null;
 parent=null;
 function default_graph(){
-  g= new graph("d");
-  g.addVertex("A",100,100);
-  g.addVertex("B",200,100);
-  g.addVertex("C",100,200);
-  g.addVertex("D",200,200);
-  g.addEdge(0,1,1); //from,to
-  g.addEdge(0,3,1);
-  g.addEdge(1,2,1);
-  g.addEdge(2,1,1);
+  dg='{"type":"dw","vertices":[{"id":0,"name":"name","children":["1","2","4"],"x":358,"y":78,"color":"blue","visited":false},{"id":1,"name":"name","children":["5"],"x":94,"y":214,"color":"blue","visited":false},{"id":2,"name":"name","children":[],"x":290,"y":204,"color":"blue","visited":false},{"id":3,"name":"name","children":["0","8"],"x":490,"y":209,"color":"blue","visited":false},{"id":4,"name":"name","children":[],"x":679,"y":207,"color":"blue","visited":false},{"id":5,"name":"name","children":["6"],"x":128,"y":351,"color":"blue","visited":false},{"id":6,"name":"name","children":["3"],"x":316,"y":341,"color":"blue","visited":false},{"id":7,"name":"name","children":["8"],"x":506,"y":353,"color":"blue","visited":false},{"id":8,"name":"name","children":[],"x":635,"y":341,"color":"blue","visited":false}],"edges":[{"from":"0","to":"1","color":"grey","weight":1},{"from":"0","to":"2","color":"grey","weight":1},{"from":"3","to":"0","color":"grey","weight":1},{"from":"0","to":"4","color":"grey","weight":1},{"from":"1","to":"5","color":"grey","weight":1},{"from":"5","to":"6","color":"grey","weight":1},{"from":"3","to":"8","color":"grey","weight":1},{"from":"6","to":"3","color":"grey","weight":1},{"from":"7","to":"8","color":"grey","weight":1}]}';
+  dg=JSON.parse(dg);
+  g=new graph();
+  g.vertices=dg.vertices;
+  g.edges=dg.edges;
+  g.type=dg.type;
   cy = cytoscape({
 
     container: document.getElementById('cy'), // container to render in
@@ -578,3 +575,6 @@ function runBFS(){
 function select_start_vertex(){
 
 }
+
+
+default_graph();
