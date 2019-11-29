@@ -379,14 +379,14 @@ function runDFS(){
         {
           selector: '.visited',
           style: {
-            'background-color': 'blue',
+            'background-color': '#FF8800',
             'label': 'data(id)'
           }
         },
         {
           selector: '.done',
           style: {
-            'background-color': 'yellow',
+            'background-color': '#14A76C',
             'label': 'data(id)'
           }
         },
@@ -394,7 +394,7 @@ function runDFS(){
           selector: '.edgeVisited',
           style: {
             'width': 3,
-           'line-color': 'green',
+           'line-color': '#007E33',
             'curve-style': 'bezier'
 
           }
@@ -432,34 +432,34 @@ function runDFS(){
         {
           selector: 'edge',
           style: {
-            'width': 1,
-           'line-color': 'red',
+            'width': 3,
+           'line-color': 'grey',
             'curve-style': 'bezier',
-            'target-arrow-color': 'blue',
+            'target-arrow-color': 'black',
             'target-arrow-shape': 'triangle'
           }
         },
         {
           selector: '.visited',
           style: {
-            'background-color': 'blue',
+            'background-color': '#FF8800',
             'label': 'data(id)'
           }
         },
         {
           selector: '.done',
           style: {
-            'background-color': 'yellow',
+            'background-color': '#14A76C',
             'label': 'data(id)'
           }
         },
         {
           selector: '.edgeVisited',
           style: {
-            'width': 1,
-           'line-color': 'blue',
+            'width': 3,
+           'line-color': '#007E33',
             'curve-style': 'bezier',
-            'target-arrow-color': 'blue',
+            'target-arrow-color': '#00733',
             'target-arrow-shape': 'triangle'
           }
         }
@@ -510,7 +510,7 @@ function runBFS(){
           selector: 'edge',
           style: {
             'width': 3,
-           'line-color': '#757575',
+           'line-color': 'grey',
             'curve-style': 'bezier',
 
           }
@@ -518,7 +518,7 @@ function runBFS(){
         {
           selector: '.visited',
           style: {
-            'background-color': 'blue',
+            'background-color': '#14A76C',
             'label': 'data(id)'
           }
         },
@@ -533,7 +533,7 @@ function runBFS(){
           selector: '.edgeVisited',
           style: {
             'width': 3,
-           'line-color': 'green',
+           'line-color': '#007E33',
             'curve-style': 'bezier'
 
           }
@@ -571,18 +571,18 @@ function runBFS(){
         {
           selector: 'edge',
           style: {
-            'width': 1,
+            'width': 3,
 
-           'line-color': 'red',
+           'line-color': 'grey',
             'curve-style': 'bezier',
-            'target-arrow-color': 'blue',
+            'target-arrow-color': 'black',
             'target-arrow-shape': 'triangle'
           }
         },
         {
           selector: '.visited',
           style: {
-            'background-color': 'blue',
+            'background-color': '#14A76C',
             'label': 'data(id)'
           }
         },
@@ -596,10 +596,10 @@ function runBFS(){
         {
           selector: '.edgeVisited',
           style: {
-            'width': 1,
-           'line-color': 'blue',
+            'width': 3,
+           'line-color': '#007E33',
             'curve-style': 'bezier',
-            'target-arrow-color': 'blue',
+            'target-arrow-color': '#007E33',
             'target-arrow-shape': 'triangle'
           }
         }
@@ -620,23 +620,29 @@ function runBFS(){
   select_start_vertex("bfs");
 }
 function select_start_vertex(algo){
-
+  $("#notice_container").show();
+  $("#notice").html("Select start vertex");
+  setTimeout(hideDiv,2000,"#notice_container");
     cy.on('tap', 'node', function(evt){
       start_id = (evt.target).id();
       run(algo,start_id);
     });
 }
 function run(algo,id){
+
   if(algo=="dfs"){
     cy.getElementById(id).addClass('visited');
     dfsStack= new stack();
     dfs(id);
     setTimeout(start,1000);
 
-  }else{
+  }else if(algo=="bfs"){
     cy.getElementById(id).addClass('visited');
     start_bfs(id);
     setTimeout(step(),1000);
+  }else if(algo =="prim"){
+    cy.getElementById(id).addClass('visited');
+    prim(id);
   }
 }
 function save_weight(){
@@ -644,17 +650,96 @@ function save_weight(){
   console.log(weight);
   for(var i=0;i<g.edges.length;i++){
     if(g.edges[i].from==selected_edge.source && g.edges[i].to==selected_edge.target){
-      g.edges[i].weight=weight;
+      g.edges[i].weight=parseInt(weight);
     }
   }
   var id="e"+selected_edge.source+","+selected_edge.target;
   cy.getElementById(id).data("weight",weight);
 }
+function runPrim(id){
+  if(g.type=="dw"||g.type=="d"||g.type=="wd"){
+    $("#notice_container").show();
+    console.log("errrrr");
+    $("#notice").html("Prim's Algo works only on undirected graphs");
+
+    setTimeout(hideDiv,5000,"#notice_container");
+    return 0;
+  }
+
+  clear();
+  cy = cytoscape({
+
+    container: document.getElementById('cy'), // container to render in
+
+    elements: [],
+
+    style: [ // the stylesheet for the graph
+      {
+        selector: 'node',
+        style: {
+          // 'background-color': 'red',
+          'label': 'data(id)'
+        }
+      },
+
+      {
+        selector: 'edge',
+        style: {
+          'width': 3,
+         'line-color': 'grey',
+         'label': 'data(weight)',
+          'curve-style': 'bezier',
+
+        }
+      },
+      {
+        selector: '.visited',
+        style: {
+          'background-color': '#14A76C',
+          'label': 'data(id)'
+        }
+      },
+      {
+        selector: '.done',
+        style: {
+          'background-color': 'yellow',
+          'label': 'data(id)'
+        }
+      },
+      {
+        selector: '.edgeVisited',
+        style: {
+          'width': 3,
+         'line-color': '#007E33',
+         'label': 'data(weight)',
+          'curve-style': 'bezier'
+
+        }
+      }
+
+    ],
+
+    layout: {
+      name: 'grid',
+      rows: 1
+    }
+
+  });
+
+  console.log(g);
+  cy.add(g.getGraph());
+
+  select_start_vertex("prim");
 
 
+}
 
+function hideDiv(div){
+  $(div).hide();
+}
 
 
 default_graph();
 
 $("#edge_property").hide();
+$("#notice_container").hide();

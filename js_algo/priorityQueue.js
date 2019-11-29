@@ -54,5 +54,14 @@ class PriorityQueue {
     {
       return this.items.length == 0;
     }
+    print()
+    {
+      
+      console.log("Start printing");
+      for (var i = 0; i < this.items.length; i++){
+        console.log(this.items[i].element);
+      }
+      console.log("end printing");
+    }
 
 }
