@@ -76,6 +76,7 @@ class graph{
       data.id="e"+""+this.edges[i].from+""+this.edges[i].to;
       data.source=this.edges[i].from;
       data.target=this.edges[i].to;
+      data.weight=this.edges[i].weight;
       edge.data=data;
       graphData.push(edge);
     }
