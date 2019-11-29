@@ -80,7 +80,7 @@ function prim(id){
         timer=timer+2;
         break;
       }else{
-        console.log("HEY RAAM, Yeh toh cut mei hai");
+        console.log("CUT EDGE");
       }
     }
   }

@@ -398,7 +398,17 @@ function runDFS(){
             'curve-style': 'bezier'
 
           }
+        },
+        {
+          selector: '.blocked',
+          style: {
+            'width': 3,
+           'line-color': 'red',
+            'curve-style': 'bezier'
+
+          }
         }
+
 
       ],
 
@@ -459,7 +469,17 @@ function runDFS(){
             'width': 3,
            'line-color': '#007E33',
             'curve-style': 'bezier',
-            'target-arrow-color': '#00733',
+
+            'target-arrow-shape': 'triangle'
+          }
+        },
+        {
+          selector: '.blocked',
+          style: {
+            'width': 3,
+           'line-color': 'red',
+            'curve-style': 'bezier',
+            'target-arrow-color': 'red',
             'target-arrow-shape': 'triangle'
           }
         }
@@ -631,16 +651,18 @@ function select_start_vertex(algo){
 function run(algo,id){
 
   if(algo=="dfs"){
-    cy.getElementById(id).addClass('visited');
-    dfsStack= new stack();
-    dfs(id);
-    setTimeout(start,1000);
+    // cy.getElementById(id).addClass('visited');
+    // dfsStack= new stack();
+    g.vertices.forEach(vertex =>{ vertex.visited =false;});
+    dfs_handler(id);
 
   }else if(algo=="bfs"){
+    g.vertices.forEach(vertex =>{ vertex.visited =false;});
     cy.getElementById(id).addClass('visited');
     start_bfs(id);
     setTimeout(step(),1000);
   }else if(algo =="prim"){
+    g.vertices.forEach(vertex =>{ vertex.visited =false;});
     cy.getElementById(id).addClass('visited');
     prim(id);
   }
