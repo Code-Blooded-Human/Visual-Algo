@@ -651,10 +651,10 @@ function select_start_vertex(algo){
 function run(algo,id){
 
   if(algo=="dfs"){
-    // cy.getElementById(id).addClass('visited');
-    // dfsStack= new stack();
-    g.vertices.forEach(vertex =>{ vertex.visited =false;});
-    dfs_handler(id);
+    cy.getElementById(id).addClass('visited');
+      dfsStack= new stack();
+      dfs(id);
+      setTimeout(start,1000);
 
   }else if(algo=="bfs"){
     g.vertices.forEach(vertex =>{ vertex.visited =false;});
